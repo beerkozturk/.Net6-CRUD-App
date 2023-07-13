@@ -1,0 +1,48 @@
+﻿@*
+
+*@
+@model EmployeeViewModel
+<div>
+    <h2>Delete Employee</h2>
+
+    <form method="POST" enctype="multipart/form-data" asp-controller="Home" asp-action="Delete">
+
+        @* <div asp-validation-summary="All"></div>  *@
+
+        <div class="form-row">
+            <input asp-for="viewEmployee.id" hidden />
+            <div class="form-group col-md-6">
+                <label asp-for="firstName">First Name</label>
+                <input asp-for="viewEmployee.firstName" class="form-control" readonly>
+                <span asp-validation-for="firstName" class="aler-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="lastName">Last Name</label>
+                <input asp-for="viewEmployee.lastName" class="form-control" readonly>
+                <span asp-validation-for="lastName" class="aler-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="job">Designation</label>
+                <input asp-for="viewEmployee.job" class="form-control" readonly>
+                <span asp-validation-for="job" class="aler-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="salary">Salary</label>
+                <input asp-for="viewEmployee.salary" class="form-control" readonly>
+                <span asp-validation-for="salary" class="aler-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="hiredate">Joining Date</label>
+                <input asp-for="viewEmployee.hiredate" class="form-control" readonly>
+                <span asp-validation-for="hiredate" class="aler-danger"></span>
+            </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Submit</button>
+    </form>
+
+</div>
+

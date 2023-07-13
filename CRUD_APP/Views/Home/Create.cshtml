@@ -1,0 +1,59 @@
+﻿
+@{
+}
+@model EmployeeViewModel
+
+<h2>@ViewBag.message</h2>
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Add Employee</h2>
+    </div>
+
+    @{
+        if(ViewBag.IsModelValid == false)
+        {
+            <div class="alert alert-danger" role="alert">
+                Form için girdiğiniz verileri kontrol edin !
+            </div>
+    }
+        
+    }
+
+
+    <form method="POST" enctype="multipart/form-data" asp-controller="Home" asp-action="CreateEmployee">
+
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="firstName">First Name</label>
+                <input type="text" class="form-control mb-3" asp-for="firstName" placeholder="Enter Employee First Name">
+                <span asp-validation-for="firstName" class="aler-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="lastName">Last Name</label>
+                <input type="text" class="form-control mb-3" asp-for="lastName" placeholder="Enter Employee Last Name">
+                <span asp-validation-for="lastName" class="aler-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="job">Designation</label>
+                <input type="text" class="form-control mb-3" asp-for="job" placeholder="Enter Designation">
+                <span asp-validation-for="job" class="aler-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="salary">Salary</label>
+                <input type="text" class="form-control mb-3" asp-for="salary" placeholder="Enter Salary">
+                <span asp-validation-for="salary" class="aler-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="hiredate">Joining Date</label>
+                <input type="date" class="form-control mb-3" asp-for="hiredate" placeholder="Enter Joining Date">
+                <span asp-validation-for="hiredate" class="aler-danger"></span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-lg btn-primary p-2" value="Submit" />
+    </form>
+</div>
