@@ -1,0 +1,39 @@
+﻿@{
+    string customStyle = "flex: 1; margin-right: 10px";
+}
+
+@model CRUD_APP.ViewModel.StatsViewModel
+
+<div style="display: flex;">
+    <div class="card bg-light mb-3" style="@customStyle">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+            <h5 href class= "card-title">En yüksek maaş</h5>
+            <p class="card-text">@Model.maxSalary</p>     
+        </div>
+    </div>
+
+    <div class="card bg-light mb-3" style="@customStyle">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+            <h5 class="card-title">En düşük maaş</h5>
+            <p class="card-text">@Model.minSalary</p>
+        </div>
+    </div>
+
+    <div class="card bg-light mb-3" style="@customStyle">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+            <h5 class="card-title">Toplam çalışan sayısı</h5>
+            <p class="card-text">@Model.maxWorker</p>
+        </div>
+    </div>
+
+    <div class="card bg-light mb-3" style="@customStyle">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+            <h5 class="card-title">Ortalama maaş</h5>
+            <p class="card-text">@Model.avgSalary</p>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,4 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
 }
 @model EmployeeIndexViewModel
 <div>
@@ -10,8 +9,6 @@
         <table class="table table-responsive bg-light">
             <thead>
                 <tr>
-                    <td>First Name</td>
-                    <td>Last Name</td>
                     <td>Designation</td>
                     <td>Salary</td>
                     <td>Joining Date</td>
@@ -19,16 +16,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.employees)
+                @foreach (var item in Model.salaries)
                 {
                     <tr>
-                        <td>@item.firstName</td>
-                        <td>@item.lastName</td>
                         <td>@item.job</td>
                         <td>@item.salary</td>
                         <td>@item.hiredate</td>
-                        <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@item.id">Edit</a></td>
-                        <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@item.id">Delete</a></td>
                     </tr>
                 }
             </tbody>

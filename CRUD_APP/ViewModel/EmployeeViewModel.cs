@@ -17,10 +17,5 @@ namespace CRUD_APP.Models
 
         public bool isModelValid { get; set; }
     }
-
-    public class EmployeeIndexModel
-    {
-        public List<Employee> employees { get; set; }
-    }
 }
 

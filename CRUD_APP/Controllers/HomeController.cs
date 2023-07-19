@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using CRUD_APP.Models;
 using CRUD_APP.Interfaces;
 using System.Text.Json;
+using CRUD_APP.ViewModel;
+using System.Linq;
 
 namespace CRUD_APP.Controllers
 {
@@ -21,7 +23,7 @@ namespace CRUD_APP.Controllers
             {
                 var Getempresult = employee.GetEmployee().Result;
                 //todo 
-                EmployeeIndexModel model = new EmployeeIndexModel();
+                EmployeeIndexViewModel model = new EmployeeIndexViewModel();
                 model.employees = employee.GetEmployee().Result.ToList();
                 return View(model);
             }
@@ -89,22 +91,46 @@ namespace CRUD_APP.Controllers
                 return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
-            EmployeeViewModel empview = new EmployeeViewModel()
+            if (id != null)
             {
-                viewEmployee = employee.GetEmployeeById(id)
-            };
-            return View(empview);
+                var result = employee.DeleteEmployee(id);
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(EmployeeViewModel viewmodel)
         {
-            var result = employee.DeleteEmployee(viewmodel.id);
             TempData["Message"] = "Employee deleted successfully.";
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Salary()
+        {
+            var model = new EmployeeIndexViewModel();
+            model.salaries = employee.GetEmployee().Result.OrderByDescending(x => x.salary).ToList();
+            return View(model);
+        }
+
+
+
+        //todo : Stats isminde bir metod oluştur ve içerisinde StatsViewModel ı new ile oluştur ve içerisine database sorgusu ile
+        //en yüksek maaş, ortalama maaş, en düşük maaş, toplam çalışan sayısını yazdır.
+        //employee.GetEmployee().Result.Count() -> Toplam çalışan sayısını verir.
+
+        public async Task<IActionResult> StatsAsync()
+        {
+            var empList = (await employee.GetEmployee());
+            var model = new StatsViewModel();
+            model.maxSalary = empList.Max(x => x.salary).GetValueOrDefault();
+            model.avgSalary = empList.Average(x => x.salary).GetValueOrDefault();
+            model.minSalary = empList.Min(x => x.salary).GetValueOrDefault();
+            model.maxWorker = empList.Count();
+            return View(model);
         }
     }
 }
